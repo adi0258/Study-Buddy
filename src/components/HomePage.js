@@ -5,6 +5,9 @@ import GoBackButton from './GoBackButton';
 import { auth, db } from '../firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
+import SettingsButton from './SettingsButton';
+
+
 
 function HomePage() {
   const navigate = useNavigate();
@@ -35,6 +38,7 @@ function HomePage() {
   
   return (
     <div className="home-container">
+      <SettingsButton />
       <GoBackButton />
       <h2 className="home-title">💖Study Buddy💖</h2>
       <p className="home-description">

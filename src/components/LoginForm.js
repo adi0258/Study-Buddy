@@ -56,7 +56,7 @@ function LoginForm() {
       <button className="login-button" onClick={handleFacebookLogin}>Facebook התחברות עם</button>
       {error && <p className="error">{error}</p>}
 
-      <p className="login-text">אין לך חשבון? <Link to="/register">הרשמה</Link></p>
+      <p className="login-text">אין לך חשבון? <Link to="/register">הרשמה באימייל</Link></p>
       
     </div>
   );

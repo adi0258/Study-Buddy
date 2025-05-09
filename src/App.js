@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { auth } from './firebase';
 import { onAuthStateChanged } from 'firebase/auth';
-
 import WelcomePage from './components/WelcomePage';
 import LoginForm from './components/LoginForm';
 import UserProfile from './components/UserProfile';
@@ -11,6 +10,8 @@ import HomePage from './components/HomePage';
 import Discover from './components/Discover';
 import Register from './components/Register';
 import UserProfilePage from './components/UserProfilePage';
+import SettingsPage from './components/SettingsPage';
+
 
 function App() {
   const [user, setUser] = useState(null);
@@ -40,6 +41,8 @@ function App() {
   <Route path="/welcome" element={<WelcomePage />} />
   <Route path="/Userprofile" element={user ? <UserProfile /> : <Navigate to="/" />} />
   <Route path="/users/:uid" element={<UserProfilePage />} />
+  <Route path="/settings" element={<SettingsPage />} />
+
 
 </Routes>
     </Router>
