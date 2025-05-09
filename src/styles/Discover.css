@@ -1,0 +1,20 @@
+.discover-container {
+    padding: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+    direction: rtl;
+    font-family: 'Varela Round', sans-serif;
+  }
+  
+  .discover-title {
+    text-align: center;
+    font-size: 30px;
+    color: #9c27b0;
+    margin-bottom: 20px;
+  }
+  
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }

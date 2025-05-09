@@ -1,0 +1,54 @@
+
+.home-container {
+    direction: rtl;
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 40px;
+    background-color: #f3e5f5;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: 'Varela Round', sans-serif;
+  }
+  
+  .home-title {
+    font-size: 28px;
+    color: #6a1b9a;
+    margin-bottom: 20px;
+  }
+  
+  .home-description {
+    font-size: 18px;
+    color: #4a148c;
+    margin-bottom: 30px;
+  }
+  
+  .home-button {
+    background-color: #ab47bc;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  .discover-button {
+    background-color: #ab47bc;
+    color: white;
+    border: none;
+    margin-right: 10px;
+    padding: 11px 23px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .home-button:hover {
+    background-color: #9c27b0;
+  }
+  .discover-button:hover {
+    background-color: #9c27b0;
+  }
+  

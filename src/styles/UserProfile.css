@@ -1,0 +1,112 @@
+.profile-container {
+    direction: rtl;
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff0f5;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    font-family: 'Varela Round', sans-serif;
+}
+
+/* כותרת הטופס */
+.profile-title {
+    text-align: center;
+    font-size: 28px;
+    margin-top:35px;
+    color: #d63384;
+    margin-bottom: 20px;
+}
+
+/* שדות טופס */
+.profile-form input,
+.profile-form select {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    border: 2px solid #f7cde2;
+    border-radius: 10px;
+    background-color: #fff;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+/* מצב שגיאה - שדות עם שגיאה */
+.profile-form input.error,
+.profile-form select.error {
+    border-color: #e53935;
+    background-color: #ffebee;
+}
+
+/* פוקוס */
+.profile-form input:focus,
+.profile-form select:focus {
+    border-color: #e91e63;
+    outline: none;
+}
+
+/* כפתור הוספת קורס */
+.profile-form button[type="button"] {
+    background-color: #f8bbd0;
+    color: #000;
+    border: none;
+    padding: 5px 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    margin-right: 10px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.profile-form button[type="button"]:hover {
+    background-color: #f48fb1;
+}
+
+/* הוספת flex ל-container של הכפתור וההודעה */
+.profile-form .button-container {
+    display: flex;
+    align-items: center; /* לוודא שהכפתור וההודעה מיושרים */
+    justify-content: flex-start; /* לא להרחיב את התצוגה */
+}
+
+/* כפתור שליחה */
+.profile-form button[type="submit"] {
+    background-color: #e91e63;
+    color: white;
+    border: none;
+    padding: 12px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+/* הודעת הצלחה / שגיאה */
+.success-message,
+.error-message {
+    margin-left: 35px; /* להוסיף רווח בין ההודעה לכפתור */
+    font-size: 15px;
+    display: inline-block;
+    text-align: left;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+/* הודעת הצלחה */
+.success-message {
+    color: #2e7d32;
+    background-color: #e8f5e9;
+    border: 1px solid #81c784;
+}
+
+/* הודעת שגיאה */
+.error-message {
+    color: #c62828;
+    background-color: #ffebee;
+    border: 1px solid #ef9a9a;
+}
+
+
