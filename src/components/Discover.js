@@ -4,6 +4,7 @@ import { collection, getDocs } from 'firebase/firestore';
 import UserCard from './UserCard';
 import '../styles/Discover.css';
 import GoBackButton from './GoBackButton';
+
 function Discover() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -11,24 +12,44 @@ function Discover() {
   useEffect(() => {
     const fetchUsers = async () => {
       const currentUser = auth.currentUser;
-      if (!currentUser) return;
+      if (!currentUser) {
+        console.error('No authenticated user found.');
+        setLoading(false);
+        return;
+      }
 
-      const snapshot = await getDocs(collection(db, 'users'));
-      const data = snapshot.docs
-        .map(doc => doc.data())
-        .filter(user => user.uid !== currentUser.uid); // לא להציג את המשתמש הנוכחי
+      try {
+        // Fetch all users from Firestore
+        const snapshot = await getDocs(collection(db, 'users'));
+        const allUsers = snapshot.docs.map(doc => doc.data());
 
-      // פילטרים להתאמה - אפשר לשפר בהמשך
-      const currentUserDoc = snapshot.docs.find(d => d.data().uid === currentUser.uid);
-      const currentUserData = currentUserDoc?.data();
-      const matchedUsers = data.filter(user =>
-        user.institution === currentUserData.institution &&
-        user.faculty === currentUserData.faculty &&
-        user.preference === currentUserData.preference
-      );
+        // Find the current user's data
+        const currentUserData = allUsers.find(user => user.uid === currentUser.uid);
+        if (!currentUserData) {
+          console.error('Current user data not found in Firestore.');
+          setLoading(false);
+          return;
+        }
 
-      setUsers(matchedUsers);
-      setLoading(false);
+        // Filter users based on shared courses and preferences
+        const matchedUsers = allUsers.filter(user => {
+          if (user.uid === currentUser.uid) return false; // Exclude the current user
+
+          // Check if there are shared courses
+          const sharedCourses = user.courses.some(course => currentUserData.courses.includes(course));
+
+          // Check if preferences match
+          const preferenceMatch = user.preference === currentUserData.preference || user.preference === 'any';
+
+          return sharedCourses && preferenceMatch;
+        });
+
+        setUsers(matchedUsers);
+      } catch (error) {
+        console.error('Error fetching users:', error);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchUsers();
@@ -38,12 +59,14 @@ function Discover() {
 
   return (
     <div className="discover-container">
-        <GoBackButton />
+      <GoBackButton />
       <h2 className="discover-title">שותפים מומלצים ללמידה 🎓</h2>
       <div className="cards-grid">
-        {users.map((user, i) => (
-          <UserCard key={i} user={user} />
-        ))}
+        {users.length > 0 ? (
+          users.map((user, i) => <UserCard key={i} user={user} />)
+        ) : (
+          <p>לא נמצאו שותפים מתאימים.</p>
+        )}
       </div>
     </div>
   );

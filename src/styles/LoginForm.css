@@ -33,12 +33,22 @@ body {
   font-size: 16px;
 }
 
+.login-buttons-container {
+  display: flex; /* Align buttons side by side */
+  justify-content: space-between; /* Add space between buttons */
+  gap: 10px; /* Add spacing between buttons */
+  margin-top: 20px;
+}
+
 .login-button {
-  width: 100%;
+  flex: 1; /* Make all buttons the same size */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   padding: 12px;
-  margin: 10px 0;
   border: none;
-  background-color: #ff3366; /* צבע ורוד */
+  background-color: #ff3366; /* Pink color */
   color: #fff;
   font-size: 16px;
   border-radius: 10px;
@@ -47,7 +57,11 @@ body {
 }
 
 .login-button:hover {
-  background-color: #e0295f; /* גוון ורוד כהה יותר */
+  background-color: #e0295f; /* Darker pink */
+}
+
+.login-logo {
+  font-size: 20px;
 }
 
 .error {

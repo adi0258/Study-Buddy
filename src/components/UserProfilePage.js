@@ -22,7 +22,7 @@ function UserProfilePage() {
     fetchUser();
   }, [uid]);
 
-  if (!userData) return <div>טוען פרופיל...</div>;
+  if (!userData) return <div>...טוען פרופיל</div>;
 
   return (
     <div className="user-profile-container">
