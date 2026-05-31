@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { db, auth, storage } from '../firebase';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import '../styles/UserProfile.css';
 import GoBackButton from './GoBackButton';
@@ -18,8 +19,7 @@ function UserProfile() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const loadProfile = async () => {
-      const user = auth.currentUser;
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (!user) return;
 
       const docSnap = await getDoc(doc(db, 'users', user.uid));
@@ -32,13 +32,12 @@ function UserProfile() {
         setPreference(data.preference || '');
         setPhotoURL(data.photoURL || '');
       } else {
-        // New user — pre-fill from auth provider (Facebook / Google)
         if (user.displayName) setName(user.displayName);
         if (user.photoURL) setPhotoURL(user.photoURL);
       }
-    };
+    });
 
-    loadProfile();
+    return () => unsubscribe();
   }, []);
 
   const institutions = [
@@ -210,6 +209,9 @@ function UserProfile() {
       <GoBackButton to="/home" />
       <h2 className="profile-title">יצירת פרופיל משתמש</h2>
       <form className="profile-form" onSubmit={handleSubmit}>
+        {photoURL && (
+          <img src={photoURL} alt="תמונת פרופיל" className="profile-photo-preview" />
+        )}
         <input type="file" accept="image/*" onChange={handleImageUpload} />
 
         <input
