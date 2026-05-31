@@ -32,16 +32,16 @@ function App() {
     <Router>
       <Routes>
   <Route path="/" element={<WelcomePage />} />
-  <Route path="/login" element={<LoginForm />} />
-  <Route path="/profile" element={user ? <UserProfile /> : <Navigate to="/" />} />
-  <Route path="/home" element={user ? <HomePage /> : <Navigate to="/" />} />
-  <Route path="*" element={<Navigate to="/" replace />} />
-  <Route path="/discover" element={<Discover />} />
-  <Route path="/register" element={<Register />} />
   <Route path="/welcome" element={<WelcomePage />} />
+  <Route path="/login" element={<LoginForm />} />
+  <Route path="/register" element={<Register />} />
+  <Route path="/home" element={user ? <HomePage /> : <Navigate to="/" />} />
+  <Route path="/profile" element={user ? <UserProfile /> : <Navigate to="/" />} />
   <Route path="/Userprofile" element={user ? <UserProfile /> : <Navigate to="/" />} />
   <Route path="/users/:uid" element={<UserProfilePage />} />
+  <Route path="/discover" element={<Discover />} />
   <Route path="/settings" element={<SettingsPage />} />
+  <Route path="*" element={<Navigate to="/" replace />} />
 
 
 </Routes>

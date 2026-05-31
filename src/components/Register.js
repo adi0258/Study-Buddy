@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
 import { useNavigate } from 'react-router-dom';
-import '../styles/Register.css'; // ייבוא הקובץ CSS
-import './GoBackButton'; // ייבוא כפתור חזרה
+import '../styles/Register.css';
 import GoBackButton from './GoBackButton';
 function Register() {
   const [email, setEmail] = useState('');

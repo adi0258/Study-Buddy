@@ -21,11 +21,13 @@ function Discover() {
       // פילטרים להתאמה - אפשר לשפר בהמשך
       const currentUserDoc = snapshot.docs.find(d => d.data().uid === currentUser.uid);
       const currentUserData = currentUserDoc?.data();
-      const matchedUsers = data.filter(user =>
-        user.institution === currentUserData.institution &&
-        user.faculty === currentUserData.faculty &&
-        user.preference === currentUserData.preference
-      );
+      const matchedUsers = currentUserData
+        ? data.filter(user =>
+            user.institution === currentUserData.institution &&
+            user.faculty === currentUserData.faculty &&
+            user.preference === currentUserData.preference
+          )
+        : data;
 
       setUsers(matchedUsers);
       setLoading(false);

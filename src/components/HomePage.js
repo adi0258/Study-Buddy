@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../styles/HomePage.css';
 import GoBackButton from './GoBackButton';
 import { auth, db } from '../firebase';

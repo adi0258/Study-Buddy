@@ -22,7 +22,7 @@ function SettingsPage() {
       await deleteDoc(doc(db, "users", user.uid));
 
       // מחיקת תמונת פרופיל
-      const imageRef = ref(storage, `profileImages/${user.uid}.jpg`);
+      const imageRef = ref(storage, `profileImages/${user.uid}`);
       await deleteObject(imageRef).catch((err) => {
         if (err.code !== "storage/object-not-found") throw err;
       });

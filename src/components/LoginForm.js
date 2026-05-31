@@ -1,10 +1,10 @@
 // src/components/LoginForm.js
 import React, { useState } from 'react';
-import { auth, googleProvider, facebookProvider } from '../firebase'; // הייבוא החדש
-import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth'; // פונקציות מתאימות לאותנטיקציה
-import { useNavigate } from 'react-router-dom';
+import { auth, googleProvider, facebookProvider } from '../firebase';
+import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { useNavigate, Link } from 'react-router-dom';
 import GoBackButton from './GoBackButton';
-import { Link } from 'react-router-dom';
+import '../styles/LoginForm.css';
 
 function LoginForm() {
   const [email, setEmail] = useState('');
