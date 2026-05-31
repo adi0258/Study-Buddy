@@ -1,52 +1,57 @@
 import React, { useEffect, useState } from 'react';
 import { db, auth } from '../firebase';
 import { collection, getDocs } from 'firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
 import UserCard from './UserCard';
 import '../styles/Discover.css';
 import GoBackButton from './GoBackButton';
+
 function Discover() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      const currentUser = auth.currentUser;
-      if (!currentUser) return;
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      if (!currentUser) {
+        setLoading(false);
+        return;
+      }
 
       const snapshot = await getDocs(collection(db, 'users'));
-      const data = snapshot.docs
-        .map(doc => doc.data())
-        .filter(user => user.uid !== currentUser.uid); // לא להציג את המשתמש הנוכחי
+      const allUsers = snapshot.docs.map(doc => doc.data());
 
-      // פילטרים להתאמה - אפשר לשפר בהמשך
-      const currentUserDoc = snapshot.docs.find(d => d.data().uid === currentUser.uid);
-      const currentUserData = currentUserDoc?.data();
+      const currentUserData = allUsers.find(u => u.uid === currentUser.uid);
+      const others = allUsers.filter(u => u.uid !== currentUser.uid);
+
       const matchedUsers = currentUserData
-        ? data.filter(user =>
+        ? others.filter(user =>
             user.institution === currentUserData.institution &&
-            user.faculty === currentUserData.faculty &&
-            user.preference === currentUserData.preference
+            user.faculty === currentUserData.faculty
           )
-        : data;
+        : others;
 
       setUsers(matchedUsers);
       setLoading(false);
-    };
+    });
 
-    fetchUsers();
+    return () => unsubscribe();
   }, []);
 
   if (loading) return <p>טוען משתמשים מותאמים...</p>;
 
   return (
     <div className="discover-container">
-        <GoBackButton />
+      <GoBackButton />
       <h2 className="discover-title">שותפים מומלצים ללמידה 🎓</h2>
-      <div className="cards-grid">
-        {users.map((user, i) => (
-          <UserCard key={i} user={user} />
-        ))}
-      </div>
+      {users.length === 0 ? (
+        <p className="no-results">לא נמצאו שותפים ללמידה מאותו מוסד וחוג עדיין 😔</p>
+      ) : (
+        <div className="cards-grid">
+          {users.map((user) => (
+            <UserCard key={user.uid} user={user} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
