@@ -1,66 +1,33 @@
-@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
-
-* {
-  font-family: 'Varela Round', sans-serif;
-}
-
-.welcome-container {
-  direction: rtl;
-  max-width: 650px;
-  margin: 60px auto;
-  padding: 40px;
-  background: linear-gradient(to bottom, #fce4ec, #f8bbd0);
-  border-radius: 25px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  color: #880e4f;
-}
-
-.welcome-container h1 {
-  font-size: 32px;
-  color: #ad1457;
-  margin-bottom: 20px;
-  line-height: 1.4;
-}
-
-.welcome-description {
-  font-size: 18px;
-  margin-bottom: 15px;
-  color: #6a1b9a;
-}
-
-.welcome-features {
-  font-size: 16px;
-  color: #4a148c;
-  margin-bottom: 30px;
-  line-height: 1.8;
-}
-
-.welcome-buttons {
+.welcome-page {
+  min-height: 100vh;
   display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 20px;
+  padding: 24px;
 }
 
-.welcome-buttons button {
-  background-color: #ec407a;
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 12px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+.welcome-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 48px 40px;
+  max-width: 540px;
+  width: 100%;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  direction: rtl;
 }
 
-.welcome-buttons button:hover {
-  background-color: #d81b60;
+.welcome-logo {
+  width: 150px;
+  display: block;
+  margin: 0 auto 24px;
+  animation: floatIn 0.8s ease-out;
 }
 
-@keyframes fadeIn {
+@keyframes floatIn {
   from {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-16px);
   }
   to {
     opacity: 1;
@@ -68,10 +35,98 @@
   }
 }
 
-.welcome-logo {
-  width: 200px;
-  height: auto;
-  margin: 0 auto 20px;
-  display: block;
-  animation: fadeIn 2s ease-out forwards;
+.welcome-heading {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+
+.welcome-description {
+  font-size: 16px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+  line-height: 1.7;
+}
+
+.welcome-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: var(--radius-sm);
+  font-size: 16px;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  padding: 12px 28px;
+  border-radius: var(--radius-sm);
+  font-size: 16px;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.15s;
+}
+
+.btn-outline:hover {
+  background: var(--primary);
+  color: white;
+  transform: translateY(-1px);
+}
+
+.welcome-features {
+  list-style: none;
+  padding: 20px 24px;
+  margin: 0;
+  text-align: right;
+  background: var(--bg);
+  border-radius: var(--radius);
+}
+
+.welcome-features li {
+  font-size: 15px;
+  color: var(--text-muted);
+  padding: 6px 0;
+  line-height: 1.6;
+}
+
+@media (max-width: 480px) {
+  .welcome-card {
+    padding: 36px 24px;
+  }
+
+  .welcome-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-primary,
+  .btn-outline {
+    width: 100%;
+  }
 }

@@ -47,7 +47,10 @@ function Discover() {
   return (
     <div className="discover-container">
       <GoBackButton to="/home" />
-      <h2 className="discover-title">שותפים מומלצים ללמידה 🎓</h2>
+      <div className="discover-header">
+        <h2 className="discover-title">שותפים מומלצים ללמידה 🎓</h2>
+        <p className="discover-subtitle">מציג תוצאות לפי מוסד וחוג</p>
+      </div>
       {users.length === 0 ? (
         <p className="no-results">לא נמצאו שותפים ללמידה מאותו מוסד וחוג עדיין 😔</p>
       ) : (

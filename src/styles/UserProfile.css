@@ -1,23 +1,122 @@
+.profile-container {
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 80px 24px 48px;
+  direction: rtl;
+}
+
+.profile-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 28px;
+}
+
+.profile-form input,
+.profile-form select {
+  display: block;
+  width: 100%;
+  padding: 13px 16px;
+  margin-bottom: 12px;
+  font-size: 15px;
+  font-family: inherit;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: white;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+  text-align: right;
+  color: var(--text);
+}
+
+.profile-form input:focus,
+.profile-form select:focus {
+  border-color: var(--primary);
+  outline: none;
+}
+
+.input-error {
+  border-color: #dc2626 !important;
+  background: #fef2f2 !important;
+}
+
+.profile-form button[type="button"] {
+  background: var(--bg);
+  color: var(--text);
+  border: 1.5px solid var(--border);
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  margin-bottom: 12px;
+  margin-left: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.profile-form button[type="button"]:hover {
+  border-color: var(--primary);
+  background: #ede9fe;
+}
+
+.profile-form button[type="submit"] {
+  width: 100%;
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 16px;
+  font-family: inherit;
+  font-weight: 600;
+  transition: background 0.2s;
+  margin-top: 8px;
+}
+
+.profile-form button[type="submit"]:hover {
+  background: var(--primary-hover);
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+}
+
 .file-input-wrapper {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  border: 1.5px dashed var(--border);
 }
 
 .file-input-label {
-  background-color: #e91e8c;
+  background: var(--primary);
   color: white;
-  padding: 8px 14px;
-  border-radius: 8px;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   font-size: 14px;
+  font-family: inherit;
+  font-weight: 600;
   white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.file-input-label:hover {
+  background: var(--primary-hover);
 }
 
 .file-input-name {
   font-size: 13px;
-  color: #555;
+  color: var(--text-muted);
 }
 
 .profile-photo-preview {
@@ -26,119 +125,6 @@
   border-radius: 50%;
   object-fit: cover;
   display: block;
-  margin: 0 auto 12px;
-  border: 3px solid #e91e8c;
+  margin: 0 auto 16px;
+  border: 3px solid var(--primary);
 }
-
-.profile-container {
-    direction: rtl;
-    max-width: 500px;
-    margin: 40px auto;
-    padding: 30px;
-    background-color: #fff0f5;
-    border-radius: 20px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    font-family: 'Varela Round', sans-serif;
-}
-
-/* כותרת הטופס */
-.profile-title {
-    text-align: center;
-    font-size: 28px;
-    margin-top:35px;
-    color: #d63384;
-    margin-bottom: 20px;
-}
-
-/* שדות טופס */
-.profile-form input,
-.profile-form select {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 10px;
-    font-size: 16px;
-    border: 2px solid #f7cde2;
-    border-radius: 10px;
-    background-color: #fff;
-    box-sizing: border-box;
-    transition: border-color 0.3s;
-}
-
-/* מצב שגיאה - שדות עם שגיאה */
-.profile-form input.error,
-.profile-form select.error {
-    border-color: #e53935;
-    background-color: #ffebee;
-}
-
-/* פוקוס */
-.profile-form input:focus,
-.profile-form select:focus {
-    border-color: #e91e63;
-    outline: none;
-}
-
-/* כפתור הוספת קורס */
-.profile-form button[type="button"] {
-    background-color: #f8bbd0;
-    color: #000;
-    border: none;
-    padding: 5px 5px;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-bottom: 20px;
-    margin-right: 10px;
-    font-size: 14px;
-    transition: background-color 0.3s;
-}
-
-.profile-form button[type="button"]:hover {
-    background-color: #f48fb1;
-}
-
-/* הוספת flex ל-container של הכפתור וההודעה */
-.profile-form .button-container {
-    display: flex;
-    align-items: center; /* לוודא שהכפתור וההודעה מיושרים */
-    justify-content: flex-start; /* לא להרחיב את התצוגה */
-}
-
-/* כפתור שליחה */
-.profile-form button[type="submit"] {
-    background-color: #e91e63;
-    color: white;
-    border: none;
-    padding: 12px 16px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
-}
-
-/* הודעת הצלחה / שגיאה */
-.success-message,
-.error-message {
-    margin-left: 35px; /* להוסיף רווח בין ההודעה לכפתור */
-    font-size: 15px;
-    display: inline-block;
-    text-align: left;
-    padding: 10px;
-    border-radius: 8px;
-}
-
-/* הודעת הצלחה */
-.success-message {
-    color: #2e7d32;
-    background-color: #e8f5e9;
-    border: 1px solid #81c784;
-}
-
-/* הודעת שגיאה */
-.error-message {
-    color: #c62828;
-    background-color: #ffebee;
-    border: 1px solid #ef9a9a;
-}
-
-

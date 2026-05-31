@@ -5,6 +5,7 @@ import { deleteDoc, doc } from "firebase/firestore";
 import { ref, deleteObject } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import GoBackButton from './GoBackButton';
+import '../styles/SettingsPage.css';
 
 function SettingsPage() {
   const [showConfirm, setShowConfirm] = useState(false);
@@ -18,25 +19,16 @@ function SettingsPage() {
   const handleDelete = async () => {
     const user = auth.currentUser;
     if (!user) return;
-
     try {
-      // אימות מחדש (דרוש לחשבונות Google)
       await reauthenticateWithPopup(user, googleProvider);
-
-      // מחיקת נתוני Firestore
       await deleteDoc(doc(db, "users", user.uid));
-
-      // מחיקת תמונת פרופיל
       const imageRef = ref(storage, `profileImages/${user.uid}`);
       await deleteObject(imageRef).catch((err) => {
         if (err.code !== "storage/object-not-found") throw err;
       });
-
-      // מחיקת המשתמש
       await deleteUser(user);
       alert("החשבון נמחק בהצלחה.");
       navigate("/");
-
     } catch (error) {
       alert("שגיאה במחיקת חשבון: " + error.message);
       console.error(error);
@@ -45,21 +37,18 @@ function SettingsPage() {
 
   return (
     <div className="settings-page">
+      <div className="settings-card">
         <GoBackButton to="/home" />
-      <h2>הגדרות</h2>
-      <button className="logout-button" onClick={handleLogout}>
-        🚪 התנתקות
-      </button>
-      <button className="delete-button" onClick={() => setShowConfirm(true)}>
-        🗑️ מחיקת חשבון
-      </button>
-
+        <h2>הגדרות</h2>
+        <button className="logout-button" onClick={handleLogout}>🚪 התנתקות</button>
+        <button className="delete-button" onClick={() => setShowConfirm(true)}>🗑️ מחיקת חשבון</button>
+      </div>
       {showConfirm && (
         <div className="modal">
           <div className="modal-content">
-            <p>האם את בטוחה שתרצי למחוק את החשבון לצמיתות?</p>
+            <p>האם אתם בטוחים שתרצו למחוק את החשבון לצמיתות?</p>
             <div className="modal-buttons">
-              <button onClick={handleDelete}>כן, מחקי</button>
+              <button onClick={handleDelete}>כן, מחק</button>
               <button onClick={() => setShowConfirm(false)}>ביטול</button>
             </div>
           </div>

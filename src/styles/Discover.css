@@ -1,20 +1,50 @@
 .discover-container {
-    padding: 30px;
-    max-width: 1000px;
-    margin: 0 auto;
-    direction: rtl;
-    font-family: 'Varela Round', sans-serif;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  direction: rtl;
+}
+
+.discover-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.discover-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.discover-subtitle {
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+.no-results {
+  text-align: center;
+  font-size: 16px;
+  color: var(--text-muted);
+  margin-top: 60px;
+  background: var(--surface);
+  padding: 48px 32px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+@media (max-width: 480px) {
+  .discover-container {
+    padding: 24px 16px;
   }
-  
-  .discover-title {
-    text-align: center;
-    font-size: 30px;
-    color: #9c27b0;
-    margin-bottom: 20px;
-  }
-  
+
   .cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
+    grid-template-columns: 1fr;
   }
+}

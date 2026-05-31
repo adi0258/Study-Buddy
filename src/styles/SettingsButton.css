@@ -1,18 +1,24 @@
 .settings-button {
-    background-color: #f1f1f1;
-    border: none;
-    color: #333;
-    padding: 10px 16px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 16px;
-    position: fixed; /* Use fixed positioning for viewport alignment */
-    top: 20px; /* Distance from the top of the screen */
-    left: 20px; /* Distance from the left of the screen */
-    transition: background-color 0.3s;
-    z-index: 999; /* Ensure it appears above other elements */
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 42px;
+  height: 42px;
+  background: white;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  z-index: 1000;
+  box-shadow: var(--shadow);
 }
 
 .settings-button:hover {
-    background-color: #ddd;
+  background: var(--bg);
+  border-color: var(--primary);
+  transform: rotate(30deg);
 }

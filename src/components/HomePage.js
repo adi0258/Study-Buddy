@@ -6,46 +6,48 @@ import { doc, getDoc } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 import SettingsButton from './SettingsButton';
 
-
-
 function HomePage() {
   const navigate = useNavigate();
   const [hasProfile, setHasProfile] = useState(false);
+  const [userName, setUserName] = useState('');
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        const docRef = doc(db, 'users', user.uid);
-        const docSnap = await getDoc(docRef);
+        const docSnap = await getDoc(doc(db, 'users', user.uid));
         setHasProfile(docSnap.exists());
+        if (docSnap.exists()) setUserName(docSnap.data().name || '');
       }
     });
-  
     return () => unsubscribe();
   }, []);
 
   const handleProfileClick = () => {
-    if (hasProfile) {
-      navigate(`/users/${auth.currentUser.uid}`);
-    } else {
-      navigate('/Userprofile');
-    }
+    navigate(hasProfile ? `/users/${auth.currentUser.uid}` : '/Userprofile');
   };
-  const handleDiscoverClick = () => {
-    navigate('/discover');
-  }
-  
+
   return (
-    <div className="home-container">
+    <div className="home-page">
       <SettingsButton />
-      <h2 className="home-title">💖Study Buddy💖</h2>
-      <p className="home-description">
-        כאן תוכלו להתחבר עם סטודנטים, לשתף קורסים ולבנות פרופיל אישי.
-      </p>
-      <button className="home-button" onClick={handleProfileClick}>
-        לפרופיל שלי
-      </button>
-      <button className="discover-button" onClick={handleDiscoverClick}>גלה שותפים🔍</button>
+      <div className="home-card">
+        <div className="home-hero">
+          <h2 className="home-title">💖 Study Buddy</h2>
+          {userName && <p className="home-greeting">שלום, {userName}! 👋</p>}
+          <p className="home-description">מצאו שותפים ללמידה, שתפו קורסים, ובנו קהילה לימודית תומכת</p>
+        </div>
+        <div className="home-actions">
+          <button className="action-card" onClick={handleProfileClick}>
+            <span className="action-icon">👤</span>
+            <span className="action-label">הפרופיל שלי</span>
+            <span className="action-arrow">←</span>
+          </button>
+          <button className="action-card accent" onClick={() => navigate('/discover')}>
+            <span className="action-icon">🔍</span>
+            <span className="action-label">גלה שותפים</span>
+            <span className="action-arrow">←</span>
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

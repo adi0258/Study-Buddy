@@ -12,7 +12,6 @@ function LoginForm() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-
   const handleEmailLogin = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then(() => navigate('/home', { replace: true }))
@@ -30,37 +29,40 @@ function LoginForm() {
       .then(() => navigate('/home', { replace: true }))
       .catch(err => setError(err.message));
   };
-  
 
   return (
-    <div className="login-container">
-      <GoBackButton to="/" />
-      <h2 className="login-title">ברוכים הבאים ל<br />Study Buddy💖</h2>
-      <p className="login-description">התחברו כדי להתחיל לשתף קורסים ולמצוא שותפים ללימודים.</p>
-      <input
-        className="login-input"
-        type="email"
-        placeholder="אימייל"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        className="login-input"
-        type="password"
-        placeholder="סיסמה"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button className="login-button" onClick={handleEmailLogin}>התחברות באימייל</button>
-      <button className="login-button" onClick={handleGoogleLogin}>Google התחברות עם</button>
-      <button className="login-button" onClick={handleFacebookLogin}>Facebook התחברות עם</button>
-      {error && <p className="error">{error}</p>}
-
-      <p className="login-text">אין לך חשבון? <Link to="/register">הרשמה באימייל</Link></p>
-      
+    <div className="auth-page">
+      <div className="auth-card">
+        <GoBackButton to="/" />
+        <h2 className="auth-title">התחברות 💖</h2>
+        <p className="auth-subtitle">ברוכים הבאים חזרה ל Study Buddy</p>
+        <div className="auth-form">
+          <input
+            className="auth-input"
+            type="email"
+            placeholder="אימייל"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            className="auth-input"
+            type="password"
+            placeholder="סיסמה"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button className="btn-auth-primary" onClick={handleEmailLogin}>התחברות באימייל</button>
+        </div>
+        <div className="auth-divider"><span>או התחברו עם</span></div>
+        <div className="social-buttons">
+          <button className="btn-social btn-google" onClick={handleGoogleLogin}>Google</button>
+          <button className="btn-social btn-facebook" onClick={handleFacebookLogin}>Facebook</button>
+        </div>
+        {error && <p className="auth-error">{error}</p>}
+        <p className="auth-footer">אין לך חשבון? <Link to="/register">הרשמה</Link></p>
+      </div>
     </div>
   );
 }
-
 
 export default LoginForm;

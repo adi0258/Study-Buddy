@@ -1,13 +1,201 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap');
+
+:root {
+  --primary: #7c3aed;
+  --primary-hover: #6d28d9;
+  --accent: #ec4899;
+  --accent-hover: #db2777;
+  --bg: #f5f3ff;
+  --surface: #ffffff;
+  --text: #1e1b4b;
+  --text-muted: #6b7280;
+  --border: #ede9fe;
+  --shadow: 0 4px 24px rgba(124, 58, 237, 0.12);
+  --shadow-lg: 0 8px 40px rgba(124, 58, 237, 0.18);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-lg: 24px;
+}
+
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  padding: 0;
+}
+
+body {
+  font-family: 'Heebo', 'Varela Round', sans-serif;
+  background: linear-gradient(135deg, #f5f3ff 0%, #fdf2f8 100%);
+  min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+/* ─── Shared Auth Layout ─── */
+
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.auth-card {
+  background: var(--surface);
+  max-width: 420px;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  padding: 48px 40px 40px;
+  box-shadow: var(--shadow-lg);
+  direction: rtl;
+  position: relative;
+}
+
+.auth-title {
+  font-size: 26px;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 24px;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.auth-subtitle {
+  font-size: 15px;
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-family: inherit;
+  text-align: right;
+  color: var(--text);
+  background: white;
+  transition: border-color 0.2s;
+}
+
+.auth-input:focus {
+  border-color: var(--primary);
+  outline: none;
+}
+
+.btn-auth-primary {
+  width: 100%;
+  padding: 14px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 16px;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-auth-primary:hover {
+  background: var(--primary-hover);
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.social-buttons {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.btn-social {
+  flex: 1;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.btn-google {
+  background: white;
+  border: 1.5px solid var(--border);
+  color: var(--text);
+}
+
+.btn-google:hover {
+  background: #f9f9f9;
+}
+
+.btn-facebook {
+  background: #1877f2;
+  border: none;
+  color: white;
+}
+
+.btn-facebook:hover {
+  background: #166fe5;
+}
+
+.auth-error {
+  color: #dc2626;
+  font-size: 13px;
+  text-align: center;
+  margin-bottom: 12px;
+  background: #fef2f2;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.auth-footer {
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.auth-footer a {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
 }

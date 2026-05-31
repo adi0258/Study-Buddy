@@ -1,54 +1,104 @@
+.home-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
 
-.home-container {
-    direction: rtl;
-    max-width: 600px;
-    margin: 60px auto;
-    padding: 40px;
-    background-color: #f3e5f5;
-    border-radius: 20px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    font-family: 'Varela Round', sans-serif;
+.home-card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 48px 40px;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: var(--shadow-lg);
+  direction: rtl;
+}
+
+.home-hero {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.home-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.home-greeting {
+  font-size: 18px;
+  color: var(--primary);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.home-description {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.home-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.action-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100%;
+  text-align: right;
+  direction: rtl;
+  font-family: inherit;
+}
+
+.action-card:hover {
+  background: #ede9fe;
+  border-color: var(--primary);
+  transform: translateX(-3px);
+  box-shadow: var(--shadow);
+}
+
+.action-card.accent {
+  background: linear-gradient(135deg, #fdf2f8, #fce7f3);
+  border-color: #fbcfe8;
+}
+
+.action-card.accent:hover {
+  border-color: var(--accent);
+  background: linear-gradient(135deg, #fce7f3, #fbcfe8);
+}
+
+.action-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.action-label {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  flex: 1;
+}
+
+.action-arrow {
+  font-size: 16px;
+  color: var(--text-muted);
+}
+
+@media (max-width: 480px) {
+  .home-card {
+    padding: 36px 20px;
   }
-  
-  .home-title {
-    font-size: 28px;
-    color: #6a1b9a;
-    margin-bottom: 20px;
-  }
-  
-  .home-description {
-    font-size: 18px;
-    color: #4a148c;
-    margin-bottom: 30px;
-  }
-  
-  .home-button {
-    background-color: #ab47bc;
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
-  }
-  .discover-button {
-    background-color: #ab47bc;
-    color: white;
-    border: none;
-    margin-right: 10px;
-    padding: 11px 23px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
-  }
-  
-  .home-button:hover {
-    background-color: #9c27b0;
-  }
-  .discover-button:hover {
-    background-color: #9c27b0;
-  }
-  
+}

@@ -4,6 +4,7 @@ import { auth } from '../firebase';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Register.css';
 import GoBackButton from './GoBackButton';
+
 function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -13,12 +14,10 @@ function Register() {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-
     if (password !== confirmPassword) {
       setMessage('❌ הסיסמאות אינן תואמות');
       return;
     }
-
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       setMessage('✅ נרשמת בהצלחה!');
@@ -29,34 +28,40 @@ function Register() {
   };
 
   return (
-    <div className="auth-container">
-      <GoBackButton to="/" />
-      <h2>הרשמה</h2>
-      <form onSubmit={handleRegister} className="auth-form">
-        <input
-          type="email"
-          placeholder="אימייל"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="סיסמה"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="אישור סיסמה"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
-        <button type="submit">הרשמה</button>
-        {message && <p className="form-message">{message}</p>}
-      </form>
+    <div className="auth-page">
+      <div className="auth-card">
+        <GoBackButton to="/" />
+        <h2 className="auth-title">הרשמה 📝</h2>
+        <p className="auth-subtitle">צרו חשבון חדש ל Study Buddy</p>
+        <form onSubmit={handleRegister} className="auth-form">
+          <input
+            className="auth-input"
+            type="email"
+            placeholder="אימייל"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            className="auth-input"
+            type="password"
+            placeholder="סיסמה"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <input
+            className="auth-input"
+            type="password"
+            placeholder="אישור סיסמה"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+          />
+          <button className="btn-auth-primary" type="submit">הרשמה</button>
+          {message && <p className="auth-error">{message}</p>}
+        </form>
+      </div>
     </div>
   );
 }
