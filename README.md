@@ -1,4 +1,5 @@
 # Study-Buddy
+https://study-buddy-m9zw.vercel.app/
 
 A web/mobile application that connects students based on shared courses, level of understanding, and availability.
 
