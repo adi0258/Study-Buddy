@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { db, auth } from '../firebase';
-import { collection, addDoc, onSnapshot, query, orderBy, serverTimestamp, doc, getDoc } from 'firebase/firestore';
+import { collection, addDoc, onSnapshot, query, orderBy, serverTimestamp, doc, getDoc, setDoc } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 import '../styles/ChatPage.css';
 
@@ -50,11 +50,17 @@ function ChatPage() {
   const handleSend = async () => {
     if (!newMessage.trim() || !currentUser) return;
     const chatId = getChatId(currentUser.uid, uid);
+    const text = newMessage.trim();
     await addDoc(collection(db, 'chats', chatId, 'messages'), {
-      text: newMessage.trim(),
+      text,
       senderId: currentUser.uid,
       createdAt: serverTimestamp(),
     });
+    await setDoc(doc(db, 'chats', chatId), {
+      participants: [currentUser.uid, uid].sort(),
+      lastMessage: text,
+      updatedAt: serverTimestamp(),
+    }, { merge: true });
     setNewMessage('');
   };
 

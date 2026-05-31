@@ -46,6 +46,11 @@ function HomePage() {
             <span className="action-label">גלה שותפים</span>
             <span className="action-arrow">←</span>
           </button>
+          <button className="action-card" onClick={() => navigate('/chats')}>
+            <span className="action-icon">💬</span>
+            <span className="action-label">השיחות שלי</span>
+            <span className="action-arrow">←</span>
+          </button>
         </div>
       </div>
     </div>
