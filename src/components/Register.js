@@ -30,7 +30,7 @@ function Register() {
 
   return (
     <div className="auth-container">
-      <GoBackButton />
+      <GoBackButton to="/" />
       <h2>הרשמה</h2>
       <form onSubmit={handleRegister} className="auth-form">
         <input

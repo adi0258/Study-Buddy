@@ -34,7 +34,7 @@ function LoginForm() {
 
   return (
     <div className="login-container">
-      <GoBackButton /> {/* כפתור חזרה */}
+      <GoBackButton to="/" />
       <h2 className="login-title">ברוכים הבאים ל<br />Study Buddy💖</h2>
       <p className="login-description">התחברו כדי להתחיל לשתף קורסים ולמצוא שותפים ללימודים.</p>
       <input

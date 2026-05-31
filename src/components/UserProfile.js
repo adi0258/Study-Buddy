@@ -207,7 +207,7 @@ function UserProfile() {
 
   return (
     <div className="profile-container">
-      <GoBackButton />
+      <GoBackButton to="/home" />
       <h2 className="profile-title">יצירת פרופיל משתמש</h2>
       <form className="profile-form" onSubmit={handleSubmit}>
         <input type="file" accept="image/*" onChange={handleImageUpload} />

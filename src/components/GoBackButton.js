@@ -1,12 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/GoBackButton.css'; // ייבוא הקובץ CSS
+import '../styles/GoBackButton.css';
 
-function GoBackButton() {
+function GoBackButton({ to }) {
   const navigate = useNavigate();
 
   return (
-    <button className="go-back-button" onClick={() => window.history.length > 1 ? navigate(-1) : navigate('/')}>
+    <button className="go-back-button" onClick={() => navigate(to)}>
       ← חזרה
     </button>
   );

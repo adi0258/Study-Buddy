@@ -26,7 +26,7 @@ function UserProfilePage() {
 
   return (
     <div className="user-profile-container">
-        <GoBackButton /> {/* כפתור חזרה */}
+        <GoBackButton to="/home" />
       <UserCard user={userData} />
     </div>
   );

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/HomePage.css';
-import GoBackButton from './GoBackButton';
 import { auth, db } from '../firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
@@ -39,7 +38,6 @@ function HomePage() {
   return (
     <div className="home-container">
       <SettingsButton />
-      <GoBackButton />
       <h2 className="home-title">💖Study Buddy💖</h2>
       <p className="home-description">
         כאן תוכלו להתחבר עם סטודנטים, לשתף קורסים ולבנות פרופיל אישי.

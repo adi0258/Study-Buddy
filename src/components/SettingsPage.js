@@ -45,7 +45,7 @@ function SettingsPage() {
 
   return (
     <div className="settings-page">
-        <GoBackButton /> {/* כפתור חזרה */}
+        <GoBackButton to="/home" />
       <h2>הגדרות</h2>
       <button className="logout-button" onClick={handleLogout}>
         🚪 התנתקות

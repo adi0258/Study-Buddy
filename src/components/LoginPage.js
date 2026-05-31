@@ -31,7 +31,7 @@ function LoginPage() {
 
   return (
     <div>
-      <GoBackButton /> {/* כפתור חזרה */}
+      <GoBackButton to="/" />
       <h2>{isSignUp ? 'הירשם' : 'התחבר'}</h2>
       <form onSubmit={handleSubmit}>
         <input
