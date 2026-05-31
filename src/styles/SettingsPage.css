@@ -4,6 +4,20 @@
     direction: rtl;
   }
   
+  .logout-button {
+    background-color: #1565c0;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 12px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .delete-button {
     background-color: #d32f2f;
     color: white;

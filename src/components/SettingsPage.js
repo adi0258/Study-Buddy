@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { auth, db, storage, googleProvider } from "../firebase";
-import { deleteUser, reauthenticateWithPopup } from "firebase/auth";
+import { deleteUser, reauthenticateWithPopup, signOut } from "firebase/auth";
 import { deleteDoc, doc } from "firebase/firestore";
 import { ref, deleteObject } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +9,11 @@ import GoBackButton from './GoBackButton';
 function SettingsPage() {
   const [showConfirm, setShowConfirm] = useState(false);
   const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await signOut(auth);
+    navigate('/', { replace: true });
+  };
 
   const handleDelete = async () => {
     const user = auth.currentUser;
@@ -42,6 +47,9 @@ function SettingsPage() {
     <div className="settings-page">
         <GoBackButton /> {/* כפתור חזרה */}
       <h2>הגדרות</h2>
+      <button className="logout-button" onClick={handleLogout}>
+        🚪 התנתקות
+      </button>
       <button className="delete-button" onClick={() => setShowConfirm(true)}>
         🗑️ מחיקת חשבון
       </button>
