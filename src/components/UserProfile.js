@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { db, auth, storage } from '../firebase';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import '../styles/UserProfile.css';
 import GoBackButton from './GoBackButton';
@@ -16,6 +16,30 @@ function UserProfile() {
   const [errors, setErrors] = useState({});
   const [photoURL, setPhotoURL] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const loadProfile = async () => {
+      const user = auth.currentUser;
+      if (!user) return;
+
+      const docSnap = await getDoc(doc(db, 'users', user.uid));
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        setName(data.name || '');
+        setInstitution(data.institution || '');
+        setFaculty(data.faculty || '');
+        setCourses(data.courses?.length ? data.courses : ['']);
+        setPreference(data.preference || '');
+        setPhotoURL(data.photoURL || '');
+      } else {
+        // New user — pre-fill from auth provider (Facebook / Google)
+        if (user.displayName) setName(user.displayName);
+        if (user.photoURL) setPhotoURL(user.photoURL);
+      }
+    };
+
+    loadProfile();
+  }, []);
 
   const institutions = [
     "אוניברסיטת אריאל בשומרון",
