@@ -11,6 +11,7 @@ import Discover from './components/Discover';
 import Register from './components/Register';
 import UserProfilePage from './components/UserProfilePage';
 import SettingsPage from './components/SettingsPage';
+import ChatPage from './components/ChatPage';
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
   <Route path="/users/:uid" element={<UserProfilePage />} />
   <Route path="/discover" element={<Discover />} />
   <Route path="/settings" element={<SettingsPage />} />
+  <Route path="/chat/:uid" element={user ? <ChatPage /> : <Navigate to="/" />} />
   <Route path="*" element={<Navigate to="/" replace />} />
 
 

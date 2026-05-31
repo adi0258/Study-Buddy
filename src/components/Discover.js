@@ -9,6 +9,8 @@ import GoBackButton from './GoBackButton';
 function Discover() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [filterPreference, setFilterPreference] = useState('all');
+  const [searchName, setSearchName] = useState('');
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -42,6 +44,10 @@ function Discover() {
     return () => unsubscribe();
   }, []);
 
+  const filteredUsers = users
+    .filter(u => filterPreference === 'all' || u.preference === filterPreference)
+    .filter(u => !searchName || u.name?.includes(searchName));
+
   if (loading) return <p>טוען משתמשים מותאמים...</p>;
 
   return (
@@ -51,12 +57,40 @@ function Discover() {
         <h2 className="discover-title">שותפים מומלצים ללמידה 🎓</h2>
         <p className="discover-subtitle">מציג תוצאות לפי מוסד וחוג</p>
       </div>
-      {users.length === 0 ? (
+
+      <div className="discover-filters">
+        <input
+          className="discover-search"
+          type="text"
+          placeholder="🔍 חיפוש לפי שם..."
+          value={searchName}
+          onChange={e => setSearchName(e.target.value)}
+          dir="rtl"
+        />
+        <div className="filter-chips">
+          {[
+            { value: 'all', label: 'הכל' },
+            { value: 'zoom', label: '💻 זום' },
+            { value: 'frontal', label: '🏫 פרונטלי' },
+            { value: 'any', label: '🤷 לא משנה' },
+          ].map(opt => (
+            <button
+              key={opt.value}
+              className={`filter-chip ${filterPreference === opt.value ? 'active' : ''}`}
+              onClick={() => setFilterPreference(opt.value)}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {filteredUsers.length === 0 ? (
         <p className="no-results">לא נמצאו שותפים ללמידה מאותו מוסד וחוג עדיין 😔</p>
       ) : (
         <div className="cards-grid">
-          {users.map((user) => (
-            <UserCard key={user.uid} user={user} />
+          {filteredUsers.map((user) => (
+            <UserCard key={user.uid} user={user} showChat />
           ))}
         </div>
       )}

@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../firebase';
 
-function UserCard({ user }) {
+function UserCard({ user, showChat = false }) {
   const navigate = useNavigate();
   const isOwnProfile = auth.currentUser?.uid === user.uid;
 
@@ -33,6 +33,11 @@ function UserCard({ user }) {
       {isOwnProfile && (
         <button className="user-card-edit-btn" onClick={() => navigate('/Userprofile')}>
           ✏️ ערוך פרופיל
+        </button>
+      )}
+      {showChat && !isOwnProfile && (
+        <button className="user-card-chat-btn" onClick={() => navigate(`/chat/${user.uid}`)}>
+          💬 שלח הודעה
         </button>
       )}
     </motion.div>
