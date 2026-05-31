@@ -10,7 +10,9 @@ function Discover() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filterPreference, setFilterPreference] = useState('all');
+  const [filterInstitution, setFilterInstitution] = useState('same');
   const [searchName, setSearchName] = useState('');
+  const [currentUserData, setCurrentUserData] = useState(null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -31,13 +33,11 @@ function Discover() {
       const others = allUsers;
 
       const matchedUsers = currentUserData
-        ? others.filter(user =>
-            user.institution === currentUserData.institution &&
-            user.faculty === currentUserData.faculty
-          )
+        ? others.filter(user => user.faculty === currentUserData.faculty)
         : others;
 
       setUsers(matchedUsers);
+      setCurrentUserData(currentUserData || null);
       setLoading(false);
     });
 
@@ -45,6 +45,7 @@ function Discover() {
   }, []);
 
   const filteredUsers = users
+    .filter(u => filterInstitution === 'all' || u.institution === currentUserData?.institution)
     .filter(u => filterPreference === 'all' || u.preference === filterPreference)
     .filter(u => !searchName || u.name?.includes(searchName));
 
@@ -55,7 +56,7 @@ function Discover() {
       <GoBackButton to="/home" />
       <div className="discover-header">
         <h2 className="discover-title">שותפים מומלצים ללמידה 🎓</h2>
-        <p className="discover-subtitle">מציג תוצאות לפי מוסד וחוג</p>
+        <p className="discover-subtitle">מציג תוצאות לפי חוג</p>
       </div>
 
       <div className="discover-filters">
@@ -67,6 +68,20 @@ function Discover() {
           onChange={e => setSearchName(e.target.value)}
           dir="rtl"
         />
+        <div className="filter-chips">
+          {[
+            { value: 'same', label: '🏛️ המוסד שלי' },
+            { value: 'all', label: '🌍 כל המוסדות' },
+          ].map(opt => (
+            <button
+              key={opt.value}
+              className={`filter-chip ${filterInstitution === opt.value ? 'active' : ''}`}
+              onClick={() => setFilterInstitution(opt.value)}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
         <div className="filter-chips">
           {[
             { value: 'all', label: 'הכל' },
