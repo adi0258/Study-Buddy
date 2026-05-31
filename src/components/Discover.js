@@ -18,7 +18,8 @@ function Discover() {
       }
 
       const snapshot = await getDocs(collection(db, 'users'));
-      const allUsers = snapshot.docs.map(doc => doc.data());
+      const isComplete = u => u.uid && u.name && u.institution && u.faculty;
+      const allUsers = snapshot.docs.map(doc => doc.data()).filter(isComplete);
 
       const currentUserData = allUsers.find(u => u.uid === currentUser.uid);
       const others = allUsers.filter(u => u.uid !== currentUser.uid);
