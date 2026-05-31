@@ -15,19 +15,19 @@ function LoginForm() {
 
   const handleEmailLogin = () => {
     signInWithEmailAndPassword(auth, email, password)
-      .then(() => navigate('/home'))
+      .then(() => navigate('/home', { replace: true }))
       .catch(err => setError(err.message));
   };
-  
+
   const handleGoogleLogin = () => {
     signInWithPopup(auth, googleProvider)
-      .then(() => navigate('/home'))
+      .then(() => navigate('/home', { replace: true }))
       .catch(err => setError(err.message));
   };
-  
+
   const handleFacebookLogin = () => {
     signInWithPopup(auth, facebookProvider)
-      .then(() => navigate('/home'))
+      .then(() => navigate('/home', { replace: true }))
       .catch(err => setError(err.message));
   };
   

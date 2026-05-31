@@ -198,7 +198,7 @@ function UserProfile() {
       await setDoc(doc(db, 'users', user.uid), profileData);
       setMessage('✅ הפרופיל נשמר בהצלחה!');
       setTimeout(() => {
-        navigate('/home');
+        navigate('/home', { replace: true });
       }, 1000);
     } catch (err) {
       setMessage('❌ שגיאה בשמירה: ' + err.message);

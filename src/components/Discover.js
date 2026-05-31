@@ -19,10 +19,14 @@ function Discover() {
 
       const snapshot = await getDocs(collection(db, 'users'));
       const isComplete = u => u.uid && u.name && u.institution && u.faculty;
-      const allUsers = snapshot.docs.map(doc => doc.data()).filter(isComplete);
+      const allUsers = snapshot.docs
+        .filter(d => d.id !== currentUser.uid)
+        .map(d => d.data())
+        .filter(isComplete);
 
-      const currentUserData = allUsers.find(u => u.uid === currentUser.uid);
-      const others = allUsers.filter(u => u.uid !== currentUser.uid);
+      const currentUserSnap = snapshot.docs.find(d => d.id === currentUser.uid);
+      const currentUserData = currentUserSnap?.data();
+      const others = allUsers;
 
       const matchedUsers = currentUserData
         ? others.filter(user =>

@@ -6,8 +6,8 @@ function GoBackButton() {
   const navigate = useNavigate();
 
   return (
-    <button className="go-back-button" onClick={() => navigate(-1)}>
-      חזרה→
+    <button className="go-back-button" onClick={() => window.history.length > 1 ? navigate(-1) : navigate('/')}>
+      ← חזרה
     </button>
   );
 }

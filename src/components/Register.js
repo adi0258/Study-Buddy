@@ -22,7 +22,7 @@ function Register() {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       setMessage('✅ נרשמת בהצלחה!');
-      setTimeout(() => navigate('/profile'), 1500);
+      setTimeout(() => navigate('/profile', { replace: true }), 1500);
     } catch (error) {
       setMessage('❌ שגיאה בהרשמה: ' + error.message);
     }
