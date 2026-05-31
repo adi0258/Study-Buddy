@@ -16,6 +16,7 @@ function UserProfile() {
   const [message, setMessage] = useState('');
   const [errors, setErrors] = useState({});
   const [photoURL, setPhotoURL] = useState('');
+  const [selectedFileName, setSelectedFileName] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -135,13 +136,13 @@ function UserProfile() {
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
-  
+
+    setSelectedFileName(file.name);
     try {
       const storageRef = ref(storage, `profileImages/${auth.currentUser.uid}`);
       await uploadBytes(storageRef, file);
       const downloadURL = await getDownloadURL(storageRef);
       setPhotoURL(downloadURL);
-      console.log('תמונה הועלתה בהצלחה', downloadURL);
     } catch (error) {
       console.error('שגיאה בהעלאת התמונה:', error);
     }
@@ -212,7 +213,15 @@ function UserProfile() {
         {photoURL && (
           <img src={photoURL} alt="תמונת פרופיל" className="profile-photo-preview" />
         )}
-        <input type="file" accept="image/*" onChange={handleImageUpload} />
+        <div className="file-input-wrapper">
+          <label className="file-input-label">
+            📷 החלף תמונה
+            <input type="file" accept="image/*" onChange={handleImageUpload} hidden />
+          </label>
+          <span className="file-input-name">
+            {selectedFileName || (photoURL ? 'התמונה הנוכחית תישמר' : 'לא נבחרה תמונה')}
+          </span>
+        </div>
 
         <input
           type="text"
